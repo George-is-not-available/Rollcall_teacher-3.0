@@ -1,0 +1,57 @@
+.Page{
+  /*1*/
+}
+.App{
+  display: flex;
+  justify-content: space-between;
+  padding: 0 235px 0 175px;
+  align-items: center;
+
+
+}
+.AppHeader{
+  display: flex;
+  flex-direction: column;
+  padding: 80px 100px 123px 100px;
+  box-shadow: 0px 4px 14px 3px rgba(0, 0, 0, 0.10), 0px 0px 1px 0px rgba(0, 0, 0, 0.30);
+  gap: 16px;
+  transform: scale(0.75);
+}
+.firstPart{
+  display: flex;
+  margin-bottom: 100px;
+
+}
+.secondPart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 414px;
+  gap: 30px;
+  margin-bottom: 75px;
+}
+.thirdPart{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 70px;
+}
+.logo{
+  width:730px;
+  height: 725px;
+  margin: 97.5px 0;
+  transform: scale(0.75);
+  margin-top: 270px;
+}
+.Divider{
+  width: 520px;
+}
+
+.goldenText {
+  color: goldenrod;
+}
+
+.blackText{
+  color: rgb(37, 37, 37);
+}

@@ -1,0 +1,69 @@
+{
+  "CoursesList": [
+    {
+      "name": "COMP3902",
+      "id": "f68d"
+    },
+    {
+      "name": "MATH1001",
+      "id": "eba1"
+    }
+  ],
+  "COMP3902": [
+    {
+      "id": "0",
+      "name": "张恩淇",
+      "points": 10,
+      "isCall": true
+    },
+    {
+      "id": "1",
+      "name": "王子浩然",
+      "points": 5,
+      "isCall": true
+    },
+    {
+      "id": "2",
+      "name": "赵胤轩",
+      "points": 7,
+      "isCall": true
+    },
+    {
+      "id": "3",
+      "name": "曾奕洲",
+      "points": 7,
+      "isCall": true
+    },
+    {
+      "id": "4",
+      "name": "付子豪",
+      "points": -114514,
+      "isCall": true
+    },
+    {
+      "id": "5",
+      "name": "段啸俣",
+      "points": 6,
+      "isCall": true
+    },
+    {
+      "id": "6",
+      "name": "高涵",
+      "points": 7,
+      "isCall": false
+    },
+    {
+      "id": "7",
+      "name": "王子元",
+      "points": 6,
+      "isCall": true
+    },
+    {
+      "id": "8",
+      "name": "吴廷潇",
+      "points": 5,
+      "isCall": false
+    }
+  ],
+  "MATH1001": []
+}

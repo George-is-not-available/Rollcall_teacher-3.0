@@ -1,0 +1,122 @@
+/* 弹窗背景样式 */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.2); /* 半透明黑色背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.course-container {
+    margin-top: 16px;
+}
+
+.course-input {
+    width: calc(100% - 100px); /* 100px 是删除按钮的宽度 */
+    margin-right: 8px;
+}
+
+.delete-button {
+    width: 80px;
+}
+
+/* 弹窗内容框样式 */
+.popup-content {
+    background-color: white; /* 白色背景 */
+    padding: 40px; /* 内边距 */
+    border-radius: 8px; /* 圆角 */
+    box-shadow: 0 0 20px rgba(0, 1, 0, 3); /* 浅阴影 */
+    max-width: 400px; /* 最大宽度 */
+    width: 80%; /* 宽度占比 */
+}
+
+/* 弹窗标题样式 */
+.popup-content h3 {
+    margin-top: 0; /* 顶部边距 */
+    margin-bottom: 20px; /* 底部边距 */
+    font-size: 1.2rem; /* 字体大小 */
+}
+
+/* 弹窗标签样式 */
+.popup-content label {
+    display: block; /* 块级元素 */
+    margin-bottom: 8px; /* 底部边距 */
+    font-weight: bold; /* 粗体 */
+}
+
+/* 弹窗输入框样式 */
+.popup-content input[type="text"] {
+    width: 100%; /* 宽度100% */
+    padding: 10px; /* 内边距 */
+    margin-bottom: 16px; /* 底部边距 */
+    border: 1px solid #ccc; /* 边框 */
+    border-radius: 4px; /* 圆角 */
+}
+
+/* 弹窗按钮样式 */
+.popup-content button {
+    padding: 10px 20px; /* 内边距 */
+    margin-right: 15px; /* 右边距 */
+    border: none; /* 无边框 */
+    border-radius: 4px; /* 圆角 */
+    background-color: #007bff; /* 蓝色背景 */
+    color: white; /* 白色文字 */
+    cursor: pointer; /* 鼠标样式为手型 */
+    transition: background-color 2s; /* 渐变动画 */
+}
+
+/* 悬停时按钮背景色 */
+.popup-content button:hover {
+    background-color: #0056b3; /* 深色背景 */
+}
+
+/* 取消按钮样式 */
+.popup-content button:last-child {
+    margin-right: 0; /* 最后一个按钮无右边距 */
+    background-color: #dc3545; /* 红色背景 */
+}
+
+/* 悬停时取消按钮背景色 */
+.popup-content button:last-child:hover {
+    background-color: #c82333; /* 深红色背景 */
+}
+
+/* 新增样式 */
+
+/* 课程框样式 */
+.course-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 15px;
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+/* 课程名称样式 */
+.course-name {
+    text-decoration: none; /* 移除下划线 */
+    color: #333;
+    font-size: 1rem;
+}
+
+/* 删除按钮样式 */
+.delete-button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+/* 删除按钮悬停样式 */
+.delete-button:hover {
+    background-color: #c82333;
+}
