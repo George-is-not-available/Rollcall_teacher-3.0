@@ -52,3 +52,8 @@
 .modal button:hover {
     background-color: #2969ad; /* 按钮鼠标悬停背景色 */
 }
+
+.red-text {
+    color: lightcoral; /* 或者使用 red */
+    font-size: larger;
+}
