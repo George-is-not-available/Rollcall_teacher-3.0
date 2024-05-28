@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Tabs, TabPane, Button, InputNumber, Typography, Spin, Descriptions, List } from '@douyinfe/semi-ui';
+import { Tabs, TabPane, Button, InputNumber, Typography, Spin, Descriptions, List, Input } from '@douyinfe/semi-ui';
 import { IconArrowLeft, IconEdit } from "@douyinfe/semi-icons";
 import { useNavigate, useLocation } from "react-router-dom";
 import * as XLSX from 'xlsx';
@@ -8,7 +8,7 @@ import styles from './index.module.css';
 import imageUrl from '../AD.png';
 import imgepay from '../payment.png';
 
-function Modal({ onClose, student, onAddPoint, onSubtractPoint }) {
+function Modal({ onClose, student, onAddPoint, onSubtractPoint,setGroupSize }) {
     return (
         <div className={styles.modalOverlay}>
             <div className={styles.modal}>
@@ -24,7 +24,7 @@ function Modal({ onClose, student, onAddPoint, onSubtractPoint }) {
     );
 }
 
-function Students({ students, isGroup, changePointsButton, course }) {
+function Students({ students, isGroup, changePointsButton, course, groupSize ,setGroupSize}) {
     const style = {
         border: '1px solid var(--semi-color-border)',
         backgroundColor: 'var(--semi-color-bg-2)',
@@ -56,7 +56,7 @@ function Students({ students, isGroup, changePointsButton, course }) {
 
     const downloadAttendance = () => {
         const headers = ['学生姓名', '签到状态'];
-        const data = attendance.map(student => [student.name, student.isPresent ? '已签到' : '未签到']);
+        const data = attendance.map(student => [student.name, student.isPresent ? '未签到' : '已签到']);
         const ws = XLSX.utils.aoa_to_sheet([headers, ...data]);
         const wb = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Attendance');
@@ -73,6 +73,23 @@ function Students({ students, isGroup, changePointsButton, course }) {
         setRandomStudent(selectedStudent);
         setShowModal(true);
     };
+
+    const handleGrouping = () => {
+        const groupedStudents = [];
+        for (let i = 0; i < students.length; i += groupSize) {
+            groupedStudents.push(students.slice(i, i + groupSize));
+        }
+        return groupedStudents;
+    };
+
+    const [groupedStudents, setGroupedStudents] = useState([]);
+
+    useEffect(() => {
+        if (isGroup && students.length > 0) {
+            const groupedStudents = handleGrouping();
+            setGroupedStudents(groupedStudents);
+        }
+    }, [students, isGroup, groupSize]);
 
     return (
         <>
@@ -100,8 +117,8 @@ function Students({ students, isGroup, changePointsButton, course }) {
                                         {!isGroup && item.isCall ? '😇' : ''}
                                         {item.name}
                                         {studentAttendance && (
-                                            <span style={{ marginLeft: '10px', color: studentAttendance.isPresent ? 'green' : 'red' }}>
-                                                ({studentAttendance.isPresent ? '已签到' : '未签到'})
+                                            <span style={{ marginLeft: '10px', color: studentAttendance.isPresent ? 'red' : 'green' }}>
+                                                ({studentAttendance.isPresent ? '未签到' : '已签到'})
                                             </span>
                                         )}
                                     </h3>
@@ -133,9 +150,25 @@ function Students({ students, isGroup, changePointsButton, course }) {
             ) : (
                 <Spin />
             )}
-            {students.length > 0 && (
-                <Button theme='solid' type='primary' style={{ marginRight: 8 }} onClick={callName}>随机点名</Button>
+
+            {isGroup && (
+                <div>
+                    <Button onClick={handleGrouping}>分组</Button>
+                    <InputNumber min={1} max={students.length} defaultValue={groupSize} onChange={setGroupSize} />
+                    {groupedStudents.map((group, index) => (
+                        <div key={index} style={{ marginTop: '20px' }}>
+                            <h3>第 {index + 1} 组</h3>
+                            <List
+                                dataSource={group}
+                                renderItem={item => (
+                                    <List.Item>{item.name}</List.Item>
+                                )}
+                            />
+                        </div>
+                    ))}
+                </div>
             )}
+
             <Button onClick={downloadAttendance}>一键下载考勤表</Button>
             {showModal && <Modal onClose={() => setShowModal(false)} student={randomStudent} />}
         </>
@@ -147,6 +180,7 @@ function App() {
     const course = location.state;
     const [students, setStudents] = useState([]);
     const [changePointsButton, setChangePointsButton] = useState(false);
+    const [groupSize, setGroupSize] = useState(5); // 默认每组人数为 5
     const navigate = useNavigate();
     const { Title, Text } = Typography;
     const [showAd, setShowAd] = useState(false);
@@ -255,6 +289,7 @@ function App() {
                         isGroup={false}
                         changePointsButton={changePointsButton}
                         course={course}
+                        groupSize={groupSize}
                     />
                 </TabPane>
                 <TabPane tab={'小组'} itemKey={'2'}>
@@ -263,6 +298,7 @@ function App() {
                         isGroup={true}
                         changePointsButton={changePointsButton}
                         course={course}
+                        groupSize={groupSize}
                     />
                 </TabPane>
             </Tabs>
@@ -282,3 +318,5 @@ function App() {
 }
 
 export default App;
+
+
