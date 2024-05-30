@@ -4,7 +4,8 @@ import CourseDemo from './CourseDemo';
 import AttendenceModal from './AttendenceModal';
 import Grouping from './Grouping';
 import FileUpload from './FileUpload';
-import Attendance from './Attendance';
+import CallName from './CallName';
+import './Attendance.css'; 
 
 const { TabPane } = Tabs;
 
@@ -28,17 +29,16 @@ function App() {
                     <FileUpload onStudentsParsed={handleStudentsParsed} />
                 </TabPane>
                 <TabPane tab="考勤" itemKey="2">
-                    <Attendance students={students} />
+                    <AttendenceModal students={students} />
                 </TabPane>
                 <TabPane tab="分组" itemKey="3">
                     <Grouping students={students} />
                 </TabPane>
-                <TabPane tab="课程演示" itemKey="4">
-                    <CourseDemo />
+                <TabPane tab="点名" itemKey="4">
+                    <CallName students={students} />
                 </TabPane>
-                <TabPane tab="考勤详情" itemKey="5">
-                    <Button onClick={() => setVisible(!visible)}>打开考勤详情</Button>
-                    <AttendenceModal visible={visible} onClose={() => setVisible(false)} />
+                <TabPane tab="课程演示" itemKey="5">
+                    <CourseDemo />
                 </TabPane>
             </Tabs>
             {showAd && (

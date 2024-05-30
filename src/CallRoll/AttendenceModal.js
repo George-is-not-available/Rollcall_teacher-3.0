@@ -1,63 +1,45 @@
-import React, { useState, useEffect } from 'react';
-import useSWR from 'swr';
-import axios from 'axios';
-import { Button, Spin, List, Modal, Typography } from '@douyinfe/semi-ui';
-import { statusToString } from './CourseDemo'; // 添加这一行
+import React, { useState } from 'react';
+import { List, Typography } from '@douyinfe/semi-ui';
+import './Attendance.css';
 
 const { Text } = Typography;
 
-const AbsenceButtons = ({ detail, update }) => {
-    const [attence, setAttence] = useState(detail.attence);
-    const [isFirstRender, setIsFirstRender] = useState(true);
+const Attendance = ({ students }) => {
+    // Initialize all students with 'present' status
+    const initialAttendance = students.reduce((acc, student) => {
+        acc[student] = 'present';
+        return acc;
+    }, {});
 
-    useEffect(() => {
-        if (!isFirstRender) {
-            axios
-                .patch(`http://localhost:4000/attenceToday/${detail.id}`, { attence })
-                .then(update);
-        } else {
-            setIsFirstRender(false);
-        }
-    }, [attence]);
+    const [attendance, setAttendance] = useState(initialAttendance);
 
-    const handleClick = (status) => {
-        setAttence(prevAttence => prevAttence === status ? 0 : status);
+    const toggleAttendance = (name) => {
+        setAttendance(prev => ({
+            ...prev,
+            [name]: (prev[name] === 'present' ? 'absent' : prev[name] === 'absent' ? 'leave' : 'present')
+        }));
     };
 
     return (
-        <div>
-            {Object.entries(statusToString).map(([status, label]) => (
-                <Button
-                    key={status}
-                    theme={attence == status ? 'solid' : 'light'}
-                    onClick={() => handleClick(status)}
-                >
-                    {label}
-                </Button>
-            ))}
-        </div>
+        <List
+            dataSource={students}
+            renderItem={name => (
+                <List.Item key={name}>
+                    <Text>{name}</Text>
+                    <Text
+                        className={`attendance-status ${attendance[name]}`}
+                        onClick={() => toggleAttendance(name)}
+                    >
+                        <a className="attendance-link">
+                            {attendance[name] === 'present' ? '请假' :
+                             attendance[name] === 'absent' ? '缺席' :
+                             '出席'}
+                        </a>
+                    </Text>
+                </List.Item>
+            )}
+        />
     );
 };
 
-const AttendenceModal = ({ visible, onClose }) => {
-    const { data, error, isLoading, mutate } = useSWR('http://localhost:4000/attences', (url) => axios.get(url).then(res => res.data));
-
-    if (isLoading) return <Spin />;
-    if (error) return <div>加载考勤数据时出错</div>;
-
-    return (
-        <Modal title="考勤详情" visible={visible} onCancel={onClose}>
-            <List
-                dataSource={data}
-                renderItem={item => (
-                    <List.Item key={item.id}>
-                        <Text>{item.date}</Text>
-                        <AbsenceButtons detail={item} update={mutate} />
-                    </List.Item>
-                )}
-            />
-        </Modal>
-    );
-};
-
-export default AttendenceModal;
+export default Attendance;

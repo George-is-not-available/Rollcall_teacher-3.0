@@ -1,0 +1,44 @@
+.attendance-status {
+    cursor: pointer;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.attendance-link {
+    text-decoration: none; /* 移除下划线 */
+    color: inherit; /* 继承父元素的颜色 */
+}
+
+.attendance-status {
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.attendance-status.present .attendance-link {
+    color: green;
+}
+
+.attendance-status.absent .attendance-link {
+    color: red;
+}
+
+
+.groups-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.group-box {
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+    width: 150px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.group-box Text {
+    display: block;
+    margin-top: 5px;
+}

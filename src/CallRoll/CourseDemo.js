@@ -15,8 +15,12 @@ export const statusToString = {
 const CourseDemo = () => {
     return (
         <div>
-            <h2>Course Demo</h2>
-            <p>This is a demo of the course content.</p>
+            <h2>JavaScript</h2>
+            <p>This is a video of the course content.</p>
+            <video controls width="600">
+                <source src="./video.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+            </video>
         </div>
     );
 };
