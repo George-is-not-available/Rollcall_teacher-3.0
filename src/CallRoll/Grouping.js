@@ -1,35 +1,33 @@
-// Grouping.js
-import React, { useState } from "react";
-import { Button, InputNumber, List } from '@douyinfe/semi-ui';
+import React, { useState } from 'react';
+import { Button, Typography } from '@douyinfe/semi-ui';
 
-function Grouping({ students, groupSize, setGroupSize }) {
-    const [groupedStudents, setGroupedStudents] = useState([]);
+const { Text } = Typography;
 
-    const handleGrouping = () => {
-        const groupedStudents = [];
-        for (let i = 0; i < students.length; i += groupSize) {
-            groupedStudents.push(students.slice(i, i + groupSize));
+const Grouping = ({ students }) => {
+    const [groups, setGroups] = useState([]);
+
+    const createGroups = (groupSize) => {
+        const shuffled = [...students].sort(() => 0.5 - Math.random());
+        const newGroups = [];
+        for (let i = 0; i < shuffled.length; i += groupSize) {
+            newGroups.push(shuffled.slice(i, i + groupSize));
         }
-        setGroupedStudents(groupedStudents);
+        setGroups(newGroups);
     };
 
     return (
         <div>
-            <Button onClick={handleGrouping}>分组</Button>
-            <InputNumber min={1} max={students.length} defaultValue={groupSize} onChange={setGroupSize} />
-            {groupedStudents.map((group, index) => (
-                <div key={index} style={{ marginTop: '20px' }}>
-                    <h3>第 {index + 1} 组</h3>
-                    <List
-                        dataSource={group}
-                        renderItem={item => (
-                            <List.Item>{item.name}</List.Item>
-                        )}
-                    />
+            <Button onClick={() => createGroups(3)}>分组（每组3人）</Button>
+            {groups.map((group, index) => (
+                <div key={index}>
+                    <Text>组 {index + 1}:</Text>
+                    {group.map(name => (
+                        <Text key={name}>{name}</Text>
+                    ))}
                 </div>
             ))}
         </div>
     );
-}
+};
 
 export default Grouping;
