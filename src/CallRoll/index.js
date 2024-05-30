@@ -11,11 +11,13 @@ const { TabPane } = Tabs;
 
 function App() {
     const [students, setStudents] = useState([]);
+    const [activeTab, setActiveTab] = useState('1'); // 初始选项卡为文件上传
     const [visible, setVisible] = useState(false);
     const [showAd, setShowAd] = useState(true);
 
     const handleStudentsParsed = (parsedStudents) => {
         setStudents(parsedStudents);
+        setActiveTab('2'); // 文件上传完成后自动切换到考勤选项卡
     };
 
     const handleCloseAd = () => {
@@ -24,7 +26,7 @@ function App() {
 
     return (
         <div>
-            <Tabs type="line">
+            <Tabs type="line" activeKey={activeTab} onChange={setActiveTab}>
                 <TabPane tab="文件上传" itemKey="1">
                     <FileUpload onStudentsParsed={handleStudentsParsed} />
                 </TabPane>

@@ -1,0 +1,25 @@
+.call-name-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* 让父元素撑满整个屏幕 */
+}
+
+.call-name-button {
+    width: 700px; /* 设置按钮宽度为 100px */
+    height: 250px; /* 设置按钮高度为 250px */
+    /* 可以根据需要自定义按钮样式 */
+}
+
+.centered-modal .semi-modal-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.call-name-button {
+    width: 700px;
+    height: 250px;
+    font-size: 50px; 
+}

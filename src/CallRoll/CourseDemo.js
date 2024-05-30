@@ -1,4 +1,5 @@
 import React from 'react';
+import MP4 from './mp4.mp4';
 
 export const AttenceStatus = {
     LATE: 1,
@@ -18,7 +19,7 @@ const CourseDemo = () => {
             <h2>JavaScript</h2>
             <p>This is a video of the course content.</p>
             <video controls width="600">
-                <source src="./video.mp4" type="video/mp4" />
+                <source src={MP4} type="video/mp4" />
                 Your browser does not support the video tag.
             </video>
         </div>

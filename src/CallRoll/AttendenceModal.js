@@ -5,13 +5,7 @@ import './Attendance.css';
 const { Text } = Typography;
 
 const Attendance = ({ students }) => {
-    // Initialize all students with 'present' status
-    const initialAttendance = students.reduce((acc, student) => {
-        acc[student] = 'present';
-        return acc;
-    }, {});
-
-    const [attendance, setAttendance] = useState(initialAttendance);
+    const [attendance, setAttendance] = useState({});
 
     const toggleAttendance = (name) => {
         setAttendance(prev => ({
@@ -31,9 +25,9 @@ const Attendance = ({ students }) => {
                         onClick={() => toggleAttendance(name)}
                     >
                         <a className="attendance-link">
-                            {attendance[name] === 'present' ? '请假' :
+                            {attendance[name] === 'present' ? '出席' :
                              attendance[name] === 'absent' ? '缺席' :
-                             '出席'}
+                             '请假'}
                         </a>
                     </Text>
                 </List.Item>
